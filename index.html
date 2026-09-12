@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="مدیریت ساده کارها">
+  <title>مدیریت کارها</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <div>
+        <p class="eyebrow">Task Manager</p>
+        <h1>مدیریت کارها</h1>
+        <p class="muted">کارهای روزانه‌ات را ساده و مرتب مدیریت کن.</p>
+      </div>
+      <button id="newTaskBtn" class="primary">+ کار جدید</button>
+    </header>
+
+    <section class="stats" aria-label="آمار کارها">
+      <div class="stat"><span>کل</span><strong id="totalCount">0</strong></div>
+      <div class="stat"><span>انجام‌نشده</span><strong id="todoCount">0</strong></div>
+      <div class="stat"><span>در حال انجام</span><strong id="progressCount">0</strong></div>
+      <div class="stat"><span>انجام‌شده</span><strong id="doneCount">0</strong></div>
+    </section>
+
+    <section class="toolbar" aria-label="جست‌وجو و فیلتر">
+      <input id="searchInput" type="search" placeholder="جست‌وجوی عنوان..." aria-label="جست‌وجوی کار">
+      <select id="statusFilter" aria-label="فیلتر وضعیت">
+        <option value="all">همه وضعیت‌ها</option>
+        <option value="todo">انجام‌نشده</option>
+        <option value="in_progress">در حال انجام</option>
+        <option value="done">انجام‌شده</option>
+      </select>
+      <select id="priorityFilter" aria-label="فیلتر اولویت">
+        <option value="all">همه اولویت‌ها</option>
+        <option value="high">زیاد</option>
+        <option value="medium">متوسط</option>
+        <option value="low">کم</option>
+      </select>
+      <select id="sortSelect" aria-label="مرتب‌سازی">
+        <option value="created_desc">جدیدترین</option>
+        <option value="created_asc">قدیمی‌ترین</option>
+        <option value="due_asc">نزدیک‌ترین سررسید</option>
+        <option value="priority_desc">اولویت بالاتر</option>
+      </select>
+    </section>
+
+    <section id="taskList" class="task-list" aria-live="polite"></section>
+  </main>
+
+  <dialog id="taskDialog">
+    <form id="taskForm" method="dialog">
+      <div class="dialog-header">
+        <h2 id="dialogTitle">کار جدید</h2>
+        <button type="button" id="closeDialog" class="icon" aria-label="بستن">×</button>
+      </div>
+      <input type="hidden" id="taskId">
+      <label>عنوان <input id="title" name="title" required maxlength="120" autocomplete="off"></label>
+      <label>توضیحات <textarea id="description" name="description" rows="4" maxlength="1000"></textarea></label>
+      <div class="form-grid">
+        <label>وضعیت
+          <select id="status" name="status">
+            <option value="todo">انجام‌نشده</option>
+            <option value="in_progress">در حال انجام</option>
+            <option value="done">انجام‌شده</option>
+          </select>
+        </label>
+        <label>اولویت
+          <select id="priority" name="priority">
+            <option value="medium">متوسط</option>
+            <option value="high">زیاد</option>
+            <option value="low">کم</option>
+          </select>
+        </label>
+      </div>
+      <label>تاریخ سررسید <input id="dueDate" name="dueDate" type="date"></label>
+      <p id="formError" class="error" role="alert"></p>
+      <div class="actions">
+        <button type="button" id="cancelBtn" class="secondary">انصراف</button>
+        <button type="submit" class="primary">ذخیره</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
